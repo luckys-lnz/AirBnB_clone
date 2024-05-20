@@ -31,18 +31,17 @@ class FileStorage:
         <obj_class_name>.id
         """
         obj_class = obj.__class__.__name__
-        FileStorage.__objects[
-            "{}.{}".format(obj_class, obj.id)] = obj
+        FileStorage.__objects["{}.{}".format(obj_class, obj.id)] = obj
 
     def save(self):
         """
-        Serialize __objects to the JSON file __file_path.
+        serializes FileStroage.__objects
         """
-        dict_obj = FileStorage.__objects
-        objdict = {obj: dict_obj[obj].to_dict()
-                   for obj in dict_obj.keys()}
-        with open(FileStorage.__file_path, "w") as file:
-            json.dump(objdict, file)
+        with open(FileStorage.__file_path, 'w+') as file:
+            obj_dict = {}
+            for key, value in FileStorage.__objects.items():
+                obj_dict[key] = value.to_dict()
+            json.dump(obj_dict, file)
 
     def reload(self):
         """
