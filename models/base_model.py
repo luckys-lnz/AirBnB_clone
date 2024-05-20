@@ -59,11 +59,11 @@ class BaseModel:
         of __dict__ of the instance.
         """
         dict_representation = self.__dict__.copy()
-        dict_representation['__class__'] =
-        self.__class__.__name__
-        dict_representation['created_at'] =
-        self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        dict_representation['updated_at'] =
-        self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        dict_representation['__class__'] = self.__class__.__name__
+        dict_representation['created_at']
+            = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        dict_representation['updated_at']
+            = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
         return dict_representation
+
 
