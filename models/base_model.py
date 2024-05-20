@@ -25,8 +25,8 @@ class BaseModel:
                 if key == "__class__":
                     continue
                 elif key == "created_at" or key == "updated_at":
-                    self.__dict__[key] \
-                        = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__dict__[key] = 
+                    datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                     setattr(self, key, value)
         else:
@@ -64,4 +64,3 @@ class BaseModel:
         dict_representation['updated_at'] \
             = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
         return dict_representation
-
