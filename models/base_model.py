@@ -1,13 +1,17 @@
 #!/usr/bin/python3
 """
-defines all common attributes/methods for other classes
+defines all common attributes/methods
+for other classes
 """
 import uuid
 from datetime import datetime
 
 
 class BaseModel:
-    """Defines common attributes and methods for other classes."""
+    """
+    Defines common attributes and
+    methods for other classes.
+    """
 
     def __init__(self, *args, **kwargs):
         """
@@ -21,7 +25,8 @@ class BaseModel:
                 if key == "__class__":
                     continue
                 elif key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__dict__[key] = datetime.strptime(value,
+                            "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                     setattr(self, key, value)
         else:
@@ -32,20 +37,33 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        """Return a string representation of the BaseModel instance."""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        """
+        Return a string representation of
+        the BaseModel instance.
+        """
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                self.id, self.__dict__)
 
     def save(self):
-        """Update the public instance attribute updated_at with the current datetime."""
+        """
+        Update the public instance attribute updated_at
+        with the current datetime.
+        """
         self.updated_at = datetime.now()
         from .__init__ import storage
         storage.save()
 
     def to_dict(self):
-        """Return a dictionary containing all keys/values of __dict__ of the instance."""
+        """
+        Return a dictionary containing all keys/values
+        of __dict__ of the instance.
+        """
         dict_representation = self.__dict__.copy()
-        dict_representation['__class__'] = self.__class__.__name__
-        dict_representation['created_at'] = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        dict_representation['updated_at'] = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        dict_representation['__class__'] =
+        self.__class__.__name__
+        dict_representation['created_at'] =
+        self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        dict_representation['updated_at'] =
+        self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
         return dict_representation
 
