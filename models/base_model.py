@@ -25,8 +25,8 @@ class BaseModel:
                 if key == "__class__":
                     continue
                 elif key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(value,
-                            "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__dict__[key] \
+                        = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                     setattr(self, key, value)
         else:
@@ -42,7 +42,7 @@ class BaseModel:
         the BaseModel instance.
         """
         return "[{}] ({}) {}".format(self.__class__.__name__,
-                self.id, self.__dict__)
+                                     self.id, self.__dict__)
 
     def save(self):
         """
@@ -60,10 +60,9 @@ class BaseModel:
         """
         dict_representation = self.__dict__.copy()
         dict_representation['__class__'] = self.__class__.__name__
-        dict_representation['created_at']
+        dict_representation['created_at'] \
             = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        dict_representation['updated_at']
+        dict_representation['updated_at'] \
             = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
         return dict_representation
-
 
