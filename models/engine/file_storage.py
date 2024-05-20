@@ -50,12 +50,26 @@ class FileStorage:
         to __objects, if it exists.
         """
         try:
-            with open(FileStorage.__file_path) as file:
-                obj_dict = json.load(file)
-                for obj in obj_dict.values():
-                    cls_name = obj["__class__"]
-                    del obj["__class__"]
-                    self.new(eval(cls_name)(**obj))
+            with open(FileStorage.__file_path, 'r') as f:
+                obj_dict = json.loads(f.read())
+                from models.base_model import BaseModel
+                from models.user import User
+                for key, value in obj_dict.items():
+                    if value['__class__'] == 'BaseModel':
+                        FileStorage.__objects[key] = BaseModel(**value)
+                    elif value['__class__'] == 'User':
+                        FileStorage.__objects[key] = User(**value)
+                    elif value['__class__'] == 'Place':
+                        FileStorage.__objects[key] = Place(**value)
+                    elif value['__class__'] == 'State':
+                        FileStorage.__objects[key] = State(**value)
+                    elif value['__class__'] == 'City':
+                        FileStorage.__objects[key] = City(**value)
+                    elif value['__class__'] == 'Amenity':
+                        FileStorage.__objects[key] = Amenity(**value)
+                    elif value['__class__'] == 'Review':
+                        FileStorage.__objects[key] = Review(**value)
+
         except FileNotFoundError:
-            return
+            pass
 
