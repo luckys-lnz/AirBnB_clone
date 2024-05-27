@@ -1,14 +1,16 @@
 #!/usr/bin/python3
-"""
-    Defines the state model
-"""
-from .base_model import BaseModel
+"""Defines the Review class."""
+from models.base_model import BaseModel
 
 
 class Review(BaseModel):
+    """Represents a review.
+
+    Attributes:
+        place_id (str): The id of the reviewed place.
+        user_id (str): The id of the user that wrote the review.
+        text (str): The text of the review.
     """
-        Definition of Review objects
-    """
-    user_id = ""
     place_id = ""
+    user_id = ""
     text = ""
