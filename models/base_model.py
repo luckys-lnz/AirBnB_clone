@@ -20,14 +20,11 @@ class BaseModel:
             *args(any): unused arguments
             **kwargs(dict): key/value Attribute name
         """
-        if len(args) != 0:
+        if kwargs:
             for key, value in kwargs.items():
-                if key == "__class__":
-                    continue
-                elif key == "created_at" or key == "updated_at":
-                    self.__dict__[key] \
-                        = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                else:
+                if key != "__class__":
+                    if key == "created_at" or key == "updated_at":
+                        value = datetime.fromisoformat(value)
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
@@ -41,8 +38,7 @@ class BaseModel:
         Return a string representation of
         the BaseModel instance.
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """
@@ -60,8 +56,6 @@ class BaseModel:
         """
         dict_rep = self.__dict__.copy()
         dict_rep['__class__'] = self.__class__.__name__
-        dict_rep['created_at'] \
-            = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        dict_rep['updated_at'] \
-            = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
+        dict_rep['created_at'] = self.created_at.isoformat()
+        dict_rep['updated_at'] = self.updated_at.isoformat()
         return dict_rep
