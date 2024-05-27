@@ -1,0 +1,60 @@
+html, body
+{
+    height: 100%;
+    width: fit-content;
+    box-sizing: border-box;
+}
+body
+{
+    margin: 0px;
+    padding: 0px;
+    color: #484848;
+    font-size: 12px;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container
+{
+    max-width: 600px;
+    margin: 15px auto;
+}
+
+
+
+@media only screen and (min-width: 600px)
+{
+
+    *,
+    *:before,
+      *:after
+    {
+
+    }
+
+    html, body
+    {
+	height: 100%;
+	width: 100%;
+	box-sizing: border-box;
+    }
+    body
+    {
+	margin: 0px;
+	padding: 0px;
+	color: #484848;
+	font-size: 14px;
+	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	display: table;
+	max-width: 100%;
+	border-collapse: collapse;
+    }
+
+    .container
+    {
+	max-width: 1000px;
+	margin: 30px auto;
+    }
+}
